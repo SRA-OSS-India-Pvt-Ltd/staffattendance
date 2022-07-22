@@ -15,6 +15,18 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
+  {
+    path: 'myleaves',
+    loadChildren: () => import('./pages/myleaves/myleaves.module').then( m => m.MyleavesPageModule)
+  },
+  {
+    path: 'myattendance',
+    loadChildren: () => import('./pages/myattendance/myattendance.module').then( m => m.MyattendancePageModule)
+  },
+  {
+    path: 'mycalendar',
+    loadChildren: () => import('./pages/mycalendar/mycalendar.module').then( m => m.MycalendarPageModule)
+  },
 ];
 
 @NgModule({
