@@ -1,0 +1,284 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="white-space: pre-wrap !important;" >Raise Request</ion-title>
+
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+<ion-list>
+  <ion-grid fixed>
+
+    <ion-row>
+      <ion-col size="6">
+         <ion-item class="padding">
+           <ion-label  style="white-space: pre-wrap !important;"><strong>Project:</strong></ion-label>
+         </ion-item>
+       </ion-col>
+       <ion-col size="6">
+         <ion-item class="input">
+
+           <ion-select interface="popover" placeholder="Select Project" (ionChange)="projectChange($event)">
+             <ion-select-option  *ngFor="let project of projectList" [value]="project.project_id">
+               {{project.project_name}}</ion-select-option>
+           </ion-select>        </ion-item>
+       </ion-col>
+     </ion-row>
+
+     <ion-row >
+      <ion-col size="6">
+        <ion-item class="padding">
+          <ion-label style="white-space: pre-wrap !important;"> <strong>Request Type	</strong>  </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item class="input">
+          <ion-select  interface = "popover" placeholder="Select " (ionChange)="requestChange($event)">
+            <ion-select-option value="Leave">Leave </ion-select-option>
+            <ion-select-option value="Permission">Permission</ion-select-option>
+
+          </ion-select>
+
+          </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isLeave" >
+      <ion-col size="6">
+        <ion-item class="padding">
+          <ion-label style="white-space: pre-wrap !important;"> <strong>Leave For	</strong>  </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item class="input">
+          <ion-select  interface = "popover" placeholder="Select " (ionChange)="leaveChange($event)">
+            <ion-select-option value="Full Day">Full Day</ion-select-option>
+            <ion-select-option value="Half Day">Half Day</ion-select-option>
+
+          </ion-select>
+
+          </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+
+
+
+
+
+
+
+    <ion-row *ngIf="isShownFromDate">
+      <ion-col size="12">
+        <ion-item class="input">
+
+          <ion-label style="white-space: pre-wrap !important;"><strong>From Date:</strong></ion-label>
+
+          <ion-input value="{{ startDate | date: 'dd-MM-yyyy' }}" id="startDate" >
+          </ion-input>
+          <ion-popover trigger="startDate" size="cover" >
+            <ng-template>
+              <ion-datetime presentation="startDate" [(ngModel)]="startDate"   [min]="minDate" (ngModelChange)="getResopnseWithDates()"></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+
+      </ion-col>
+
+
+    </ion-row>
+
+    <ion-row *ngIf="isShownToDate">
+      <ion-col size="12">
+        <ion-item class="input">
+
+          <ion-label style="white-space: pre-wrap !important;"><strong>To Date:</strong></ion-label>
+
+
+          <ion-input value="{{ endDate | date: 'dd-MM-yyyy' }}" id="endDate" >
+          </ion-input>
+          <ion-popover trigger="endDate" size="cover" >
+            <ng-template>
+              <ion-datetime presentation="endDate" [(ngModel)]="endDate" [min]="minDate" (ngModelChange)="getResopnseWithDates1()"></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+
+      </ion-col>
+
+
+    </ion-row>
+
+
+
+
+
+
+
+
+    <ion-row *ngIf="isShownFromTime">
+      <ion-col size="12">
+        <ion-item class="input">
+
+          <ion-label style="white-space: pre-wrap !important;"><strong>From Time:</strong></ion-label>
+
+
+          <ion-input value="{{ fromTime | date: 'dd-MM-yyyy hh:mm' }}" id="fromTime" >
+          </ion-input>
+          <ion-popover trigger="fromTime" size="cover"  >
+            <ng-template>
+              <ion-datetime displayFormat="h:mm A"  [(ngModel)]="fromTime" [min]="minDate" (ngModelChange)="getResopnseWithTimes()"></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+
+      </ion-col>
+
+
+    </ion-row>
+
+    <ion-row *ngIf="isShownTotime">
+      <ion-col size="12">
+        <ion-item class="input">
+
+          <ion-label style="white-space: pre-wrap !important;"><strong>To Time:</strong></ion-label>
+
+
+          <ion-input value="{{ toTime | date: 'dd-MM-yyyy hh:mm' }}" id="toTime" >
+          </ion-input>
+          <ion-popover trigger="toTime" size="cover"  >
+            <ng-template>
+              <ion-datetime displayFormat="h:mm A"  [(ngModel)]="toTime" [min]="minDate" (ngModelChange)="getResopnseWithTimes1()"></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+
+      </ion-col>
+
+
+    </ion-row>
+
+
+    <ion-row *ngIf="isShownDays">
+      <ion-col size="6">
+        <ion-item class="padding">
+          <ion-label style="white-space: pre-wrap !important;"><strong>Days:</strong> </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item class="input">
+          <ion-label>{{days}}</ion-label>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+
+
+    <ion-row *ngIf="isPermission">
+      <ion-col size="12">
+        <ion-item class="input">
+
+          <ion-label style="white-space: pre-wrap !important;"><strong>From </strong></ion-label>
+
+
+          <ion-input value="{{ from | date: 'dd-MM-yyyy hh:mm' }}" id="from" >
+          </ion-input>
+          <ion-popover trigger="from" size="cover"  >
+            <ng-template>
+              <ion-datetime displayFormat="h:mm A"  [(ngModel)]="from" [min]="minDate"  (ngModelChange)="getResopnseWithPermission()"></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+
+      </ion-col>
+
+
+    </ion-row>
+
+    <ion-row *ngIf="isPermission">
+      <ion-col size="12">
+        <ion-item class="input">
+
+          <ion-label style="white-space: pre-wrap !important;"><strong>To </strong></ion-label>
+
+
+          <ion-input value="{{ to | date: 'dd-MM-yyyy hh:mm' }}" id="to" >
+          </ion-input>
+          <ion-popover trigger="to" size="cover"  >
+            <ng-template>
+              <ion-datetime displayFormat="h:mm A"  [(ngModel)]="to" [min]="minDate" (ngModelChange)="getResopnseWithPermission1()"  ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+
+      </ion-col>
+
+
+    </ion-row>
+
+    <ion-row >
+      <ion-col size="6">
+        <ion-item class="padding">
+          <ion-label style="white-space: pre-wrap !important;"> <strong>Reason	</strong>  </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item class="input">
+         <ion-input type="text" [(ngModel)]="reason"></ion-input>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row >
+      <ion-col size="6">
+        <ion-item class="padding">
+          <ion-label style="white-space: pre-wrap !important;"> <strong>Reporting Manager	</strong>  </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item class="input">
+          <ion-label style="white-space: pre-wrap !important;"> {{reportingmanager}}	  </ion-label>
+
+          </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isbtn1" >
+      <ion-col size="6">
+        <ion-button style="text-transform: none;" (click)="submitPermission()" expand="block" >Submit            </ion-button>
+      </ion-col>
+
+          <ion-col size="6">
+        <ion-button style="text-transform: none;" (click)="cancel()" expand="block" >Cancel            </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="isbtn2" >
+        <ion-col size="6">
+          <ion-button style="text-transform: none;" (click)="submitLeave()" expand="block" >Submit            </ion-button>
+        </ion-col>
+
+            <ion-col size="6">
+          <ion-button style="text-transform: none;" (click)="cancel()" expand="block" >Cancel            </ion-button>
+          </ion-col>
+        </ion-row>
+
+
+
+
+</ion-grid>
+</ion-list>
+
+
+
+
+
+</ion-content>

@@ -66,12 +66,40 @@
       </ion-col>
     </ion-row>
 
+
+
     <ion-row>
 
-      <ion-col size="12">
+      <ion-col size="6">
+        <ion-card color="primary"  (click)="movetoLeaveRequests()">
+          <ion-card-header >
+            <ion-label style="white-space: pre-wrap !important;"> <strong>Leave Request</strong></ion-label>
+
+
+
+          </ion-card-header>
+          <ion-card-content>
+
+            <ion-item color="primary" class="padding">
+              <ion-label></ion-label>
+            </ion-item>
+
+
+
+
+
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
         <ion-card color="primary"  (click)="movetoLeaves()">
           <ion-card-header >
             <ion-label style="white-space: pre-wrap !important;"> <strong>My Leaves</strong></ion-label>
+
+
+
           </ion-card-header>
           <ion-card-content>
 
@@ -88,6 +116,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
+
 </ion-grid>
 
 </ion-content>

@@ -1,72 +1,53 @@
-
-h2.headertekst {
-  text-align: center;
-  font-size: 36px;
-  font-weight: bold;
+canvas {
+  display: block;
+  border: 2px solid #3880ff;
+  background-color: rgb(245, 241, 237)
 }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+
+.label{
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+
+}
+.padding{
+    margin: 5px;
+  --border-width: 0;
+  --inner-border-width: 0;
+}
+.padding1{
+
+  --border-width: 0;
+--inner-border-width: 0;
 }
 .input{
   margin: 5px;
   border: 2px solid;
   border-radius: 4px;
-  padding: 10px;
-  margin-right: 10px;
 
   border-color:  #3880ff;
   --border-width: 0;
   --inner-border-width: 0;
 
-}
-.padding{
-  margin: 5px;
-
-  padding: 10px;
-
-
-  --border-width: 0;
-  --inner-border-width: 0;
 
 }
-
-.optionGroup {
-  font-weight: bold;
-  font-style: italic;
+.card {
+  border: 3px solid #0093d2
 }
-
-.optionChild {
-  padding-left: 15px;
-}
-.img3{
-  display: block;
-  margin-left: 15px;
-  margin-right: auto;
-  width: 100% !important;
-  height: 100% !important;
-
- }
- .vertical-center{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
 .img2{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20% !important;
-  height: 20% !important;
+  width: 50% !important;
+  height: 50% !important;
  }
- .bg{
-   background-color: white;
- }
- .text{
-   text-transform: none;
- }
+.button{
+    margin: 5px;
+}
+.required-asterisk{
+  color: red;
+  font-weight: bold;
+  margin-left: 3px;
+  font-size: 1.2em;
+}
+

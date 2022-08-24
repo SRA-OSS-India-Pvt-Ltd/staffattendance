@@ -1,72 +1,37 @@
-
-h2.headertekst {
-  text-align: center;
-  font-size: 36px;
-  font-weight: bold;
+.indicator-container {
+  padding-left: 0.5rem;
+  padding-bottom: 0.4rem;
 }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+.event-indicator {
+  background: white;
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  display: table-cell;
+}
+
+:host ::ng-deep {
+  .monthview-primary-with-event {
+    background-color: white !important;
+  }
+
+  .monthview-selected {
+    background-color: white !important;
+  }
+}
+
+.with-event {
+  background-color: white;
+  border-radius: 15px;
 }
 .input{
   margin: 5px;
   border: 2px solid;
   border-radius: 4px;
-  padding: 10px;
-  margin-right: 10px;
 
-  border-color:  #3880ff;
+  border-color:  #0093d2;
   --border-width: 0;
   --inner-border-width: 0;
 
 }
-.padding{
-  margin: 5px;
-
-  padding: 10px;
-
-
-  --border-width: 0;
-  --inner-border-width: 0;
-
-}
-
-.optionGroup {
-  font-weight: bold;
-  font-style: italic;
-}
-
-.optionChild {
-  padding-left: 15px;
-}
-.img3{
-  display: block;
-  margin-left: 15px;
-  margin-right: auto;
-  width: 100% !important;
-  height: 100% !important;
-
- }
- .vertical-center{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.img2{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20% !important;
-  height: 20% !important;
- }
- .bg{
-   background-color: white;
- }
- .text{
-   text-transform: none;
- }

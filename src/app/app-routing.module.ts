@@ -27,6 +27,14 @@ const routes: Routes = [
     path: 'mycalendar',
     loadChildren: () => import('./pages/mycalendar/mycalendar.module').then( m => m.MycalendarPageModule)
   },
+  {
+    path: 'leaverequest',
+    loadChildren: () => import('./pages/leaverequest/leaverequest.module').then( m => m.LeaverequestPageModule)
+  },
+  {
+    path: 'leavedetails',
+    loadChildren: () => import('./pages/leavedetails/leavedetails.module').then( m => m.LeavedetailsPageModule)
+  },
 ];
 
 @NgModule({

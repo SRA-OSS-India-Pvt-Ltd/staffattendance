@@ -12,4 +12,110 @@
 
 <ion-content>
 
+
+
+  <ion-item class="input">
+    <ion-label><strong>Month</strong></ion-label>
+    <ion-select  placeholder="Select Month"  (ionChange)="monthChange($event)">
+      <ion-select-option value="1">January</ion-select-option>
+      <ion-select-option value="2">February</ion-select-option>
+      <ion-select-option value="3">March</ion-select-option>
+      <ion-select-option value="4">April</ion-select-option>
+      <ion-select-option value="5">May</ion-select-option>
+      <ion-select-option value="6">June</ion-select-option>
+      <ion-select-option value="7">July</ion-select-option>
+      <ion-select-option value="8">August</ion-select-option>
+      <ion-select-option value="9">September</ion-select-option>
+      <ion-select-option value="10">October</ion-select-option>
+      <ion-select-option value="11">November</ion-select-option>
+      <ion-select-option value="12">December</ion-select-option>
+
+
+    </ion-select>
+  </ion-item>
+
+  <ion-item class="input">
+    <ion-label><strong>Year</strong></ion-label>
+    <ion-select  placeholder="Select Year"  (ionChange)="yearChange($event)">
+      <ion-select-option value="2022">2022</ion-select-option>
+      <ion-select-option value="2021">2021</ion-select-option>
+      <ion-select-option value="2020">2020</ion-select-option>
+
+
+
+    </ion-select>
+  </ion-item>
+  <ion-row>
+    <!-- Move back one screen of the slides -->
+    <ion-col size="2">
+      <ion-button fill="clear" (click)="back()" style="text-transform:none">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="8" class="ion-text-center">
+      <h2>{{ viewTitle }}</h2>
+    </ion-col>
+
+    <!-- Move forward one screen of the slides -->
+    <ion-col size="2">
+      <ion-button fill="clear" (click)="next()" style="text-transform:none">
+        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="3">
+      <ion-label >
+        <ion-icon name="stop" slot="icon-only" color="danger"></ion-icon> NE
+      </ion-label>
+    </ion-col>
+    <ion-col size="3">
+      <ion-label >
+        <ion-icon name="stop" slot="icon-only" color="success"></ion-icon> P
+      </ion-label>
+    </ion-col>
+    <ion-col size="3">
+      <ion-label >
+        <ion-icon name="stop" slot="icon-only" color="secondary"></ion-icon> CR
+      </ion-label>
+    </ion-col>
+    <ion-col size="3">
+      <ion-label >
+        <ion-icon name="stop" slot="icon-only" color="tertiary"></ion-icon> L
+      </ion-label>
+    </ion-col>
+  </ion-row>
+<!--
+  <ion-segment  [(ngModel)]="calendar.mode">
+    <ion-segment-button value="month">
+      <ion-label>Month</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="week">
+      <ion-label>Week</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="day">
+      <ion-label>Day</ion-label>
+    </ion-segment-button>
+  </ion-segment> -->
+
+  <ng-template  #template let-view="view"  let-row="row" let-col="col" >
+    <div  class="event-indicator" *ngFor="let obj of view.dates[row*7+col].events"  >
+
+      <p [ngStyle]="{'background-color': obj.eventColor}">
+          {{view.dates[row*7+col].label}}</p>
+    </div>
+  </ng-template>
+
+
+<calendar
+[monthviewDisplayEventTemplate]="template"
+[eventSource]="eventSource"
+[currentDate]="calendar.currentDate"
+(onEventSelected)="onEventSelected($event)"
+(onTitleChanged)="onViewTitleChanged($event)"
+(onTimeSelected)="onTimeSelected($event)">
+</calendar>
+
 </ion-content>
