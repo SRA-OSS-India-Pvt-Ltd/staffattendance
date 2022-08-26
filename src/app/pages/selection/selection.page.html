@@ -1,0 +1,74 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title style="white-space: pre-wrap !important;" >Attendance</ion-title>
+
+
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content>
+
+
+  <ion-grid fixed>
+    <ion-row>
+
+      <ion-col size="6">
+        <ion-card color="primary"  (click)="movetoAttendance()">
+          <ion-card-header >
+            <ion-label style="white-space: pre-wrap !important;"> <strong>Today</strong></ion-label>
+
+
+
+          </ion-card-header>
+          <ion-card-content>
+
+            <ion-item color="primary" class="padding">
+              <ion-label></ion-label>
+            </ion-item>
+
+
+
+
+
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card color="primary"  (click)="getResubmissionDates()">
+          <ion-card-header >
+            <ion-label style="white-space: pre-wrap !important;"> <strong>Resubmission</strong></ion-label>
+
+
+
+          </ion-card-header>
+          <ion-card-content>
+
+            <ion-item color="primary" class="padding">
+              <ion-label></ion-label>
+            </ion-item>
+
+
+
+
+
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+
+
+
+
+</ion-grid>
+
+</ion-content>
+</ion-app>

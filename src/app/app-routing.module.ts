@@ -35,6 +35,14 @@ const routes: Routes = [
     path: 'leavedetails',
     loadChildren: () => import('./pages/leavedetails/leavedetails.module').then( m => m.LeavedetailsPageModule)
   },
+  {
+    path: 'resubmission',
+    loadChildren: () => import('./pages/resubmission/resubmission.module').then( m => m.ResubmissionPageModule)
+  },
+  {
+    path: 'selection',
+    loadChildren: () => import('./pages/selection/selection.module').then( m => m.SelectionPageModule)
+  },
 ];
 
 @NgModule({
