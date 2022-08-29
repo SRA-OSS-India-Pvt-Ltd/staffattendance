@@ -82,7 +82,7 @@
 
           <ion-input value="{{ startDate | date: 'dd-MM-yyyy' }}" id="startDate" >
           </ion-input>
-          <ion-popover trigger="startDate" size="cover" [dismissOnSelect]="true" >
+          <ion-popover trigger="startDate" size="cover" >
             <ng-template>
               <ion-datetime presentation="startDate" [(ngModel)]="startDate"   [min]="minDate" (ngModelChange)="getResopnseWithDates()"></ion-datetime>
             </ng-template>
@@ -103,7 +103,7 @@
 
           <ion-input value="{{ endDate | date: 'dd-MM-yyyy' }}" id="endDate" >
           </ion-input>
-          <ion-popover trigger="endDate" size="cover"  [dismissOnSelect]="true">
+          <ion-popover trigger="endDate" size="cover" >
             <ng-template>
               <ion-datetime presentation="endDate" [(ngModel)]="endDate" [min]="minDate" (ngModelChange)="getResopnseWithDates1()"></ion-datetime>
             </ng-template>
@@ -131,7 +131,7 @@
 
           <ion-input value="{{ fromTime | date: 'dd-MM-yyyy hh:mm' }}" id="fromTime" >
           </ion-input>
-          <ion-popover trigger="fromTime" size="cover"  [dismissOnSelect]="true" >
+          <ion-popover trigger="fromTime" size="cover"  >
             <ng-template>
               <ion-datetime displayFormat="h:mm A"  [(ngModel)]="fromTime" [min]="minDate" (ngModelChange)="getResopnseWithTimes()"></ion-datetime>
             </ng-template>
@@ -152,7 +152,7 @@
 
           <ion-input value="{{ toTime | date: 'dd-MM-yyyy hh:mm' }}" id="toTime" >
           </ion-input>
-          <ion-popover trigger="toTime" size="cover"  [dismissOnSelect]="true" >
+          <ion-popover trigger="toTime" size="cover"  >
             <ng-template>
               <ion-datetime displayFormat="h:mm A"  [(ngModel)]="toTime" [min]="minDate" (ngModelChange)="getResopnseWithTimes1()"></ion-datetime>
             </ng-template>
@@ -190,7 +190,7 @@
 
           <ion-input value="{{ from | date: 'dd-MM-yyyy hh:mm' }}" id="from" >
           </ion-input>
-          <ion-popover trigger="from" size="cover"  [dismissOnSelect]="true" >
+          <ion-popover trigger="from" size="cover"  >
             <ng-template>
               <ion-datetime displayFormat="h:mm A"  [(ngModel)]="from" [min]="minDate"  (ngModelChange)="getResopnseWithPermission()"></ion-datetime>
             </ng-template>
@@ -211,7 +211,7 @@
 
           <ion-input value="{{ to | date: 'dd-MM-yyyy hh:mm' }}" id="to" >
           </ion-input>
-          <ion-popover trigger="to" size="cover"  [dismissOnSelect]="true">
+          <ion-popover trigger="to" size="cover" >
             <ng-template>
               <ion-datetime displayFormat="h:mm A"  [(ngModel)]="to" [min]="minDate" (ngModelChange)="getResopnseWithPermission1()"  ></ion-datetime>
             </ng-template>

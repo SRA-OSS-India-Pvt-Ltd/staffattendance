@@ -329,26 +329,12 @@ public router: Router
         this.toastSer.presentError('Please select Project');
       }else if(this.project === ''){
         this.toastSer.presentError('Please select Project');
-      }else if(this.loginType === undefined){
-        this.toastSer.presentError('Please select Login Type');
-      }else if(this.loginType === null){
-        this.toastSer.presentError('Please select Login Type');
-      }else if(this.loginType === ''){
-        this.toastSer.presentError('Please select Login Type');
       }else if(this.loginTime === undefined){
         this.toastSer.presentError('Please select Login Time');
       }else if(this.loginTime === ''){
         this.toastSer.presentError('Please select Login Time');
       }else if(this.loginTime === null){
         this.toastSer.presentError('Please select Login Time');
-      }
-
-      else if(this.logoutType === undefined){
-        this.toastSer.presentError('Please select Logout Type');
-      }else if(this.logoutType === null){
-        this.toastSer.presentError('Please select Logout Type');
-      }else if(this.logoutType === ''){
-        this.toastSer.presentError('Please select Logout Type');
       }
       else if(this.logoutTime === undefined){
         this.toastSer.presentError('Please select Logout Time');
@@ -357,6 +343,21 @@ public router: Router
       }else if(this.logoutTime === null){
         this.toastSer.presentError('Please select Logout Time');
       }
+      else if(this.loginType === undefined){
+        this.toastSer.presentError('Please select Login Type');
+      }else if(this.loginType === null){
+        this.toastSer.presentError('Please select Login Type');
+      }else if(this.loginType === ''){
+        this.toastSer.presentError('Please select Login Type');
+      }
+      else if(this.logoutType === undefined){
+        this.toastSer.presentError('Please select Logout Type');
+      }else if(this.logoutType === null){
+        this.toastSer.presentError('Please select Logout Type');
+      }else if(this.logoutType === ''){
+        this.toastSer.presentError('Please select Logout Type');
+      }
+
 
 
 
