@@ -57,6 +57,7 @@ export class HomePage {
       Constants.loginUserName = this.postData.employeeid;
       Constants.loginPassword = this.postData.epassword;
 
+
       this. platform.ready().then(() => {
         if (this.platform.is('android')) {
           this.checkUserExist();
@@ -93,6 +94,9 @@ export class HomePage {
         Constants.rmid = response.data.rep_mang_id;
 
         this.router.navigate(['dashboard']);
+        this.postData.employeeid = '';
+        this.postData.epassword = '';
+
 
 
       }else{
@@ -126,9 +130,16 @@ export class HomePage {
           response.data.reporting_manager,response.data.rep_mang_id);
         for (let i = 0; i < Constants.projectList.length; i++) {
           this.database.addProjects(Constants.projectList[i].project_id,
-            Constants.projectList[i].project_name);
+            Constants.projectList[i].project_name,
+            Constants.projectList[i].rep_mang_id,
+            Constants.projectList[i].reporting_manager
+
+            );
          }
          this.router.navigate(['dashboard']);
+         this.postData.employeeid = '';
+         this.postData.epassword = '';
+
 
 
 

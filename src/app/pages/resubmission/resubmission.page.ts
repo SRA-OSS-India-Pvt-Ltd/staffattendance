@@ -49,6 +49,8 @@ export class ResubmissionPage implements OnInit {
   blobImage: any;
   originalImage: any;
 
+  comments: any;
+  selectedProject: any = [];
   constructor(public platform: Platform,
     public database: DatabaseService,
     private geolocation: Geolocation,
@@ -85,6 +87,7 @@ public router: Router
     this.selecteditem = [$event.target.value];
     this.resubmitDate = this.selecteditem[0].tracking_date;
     this.project = this.selecteditem[0].project_id;
+    this.comments = this.selecteditem[0].rejection_comments;
     if(this.project === '1'){
       this.prvalu = 'DFCCIL Package - 1';
     }else if(this.project === '2'){
@@ -123,8 +126,15 @@ public router: Router
   }
 
   projectChange($event){
-    this.project = $event.target.value;
-    console.log($event.target.value);
+    this.selectedProject = [$event.target.value];
+
+    if(this.selectedProject[0].reporting_manager !== ''){
+      this.project = this.selectedProject[0].project_id;
+      }else{
+        this.project = null;
+        this.toastSer.presentError('Please select another Project, this projects dont have RM');
+      }
+
 
 
    }
@@ -391,14 +401,14 @@ public router: Router
 
     servicecall(){
       this.httpClientSer.staffresubmitattendance(Constants.userid,this.project,this.waterMarkImage.nativeElement.src,
-        this.latitude,this.longitude,this.loginType,this.logoutType)
+        this.latitude,this.longitude,this.loginType,this.logoutType,this.resubmitDate,this.loginTime,this.logoutTime)
         .subscribe((response: any)=>{
           if(response.error === false){
             this.toastSer.presentSuccess(response.msg);
             this.router.navigate(['selection']);
 
           }else{
-            this.toastSer.presentSuccess(response.msg);
+            this.toastSer.presentError(response.msg);
 
           }
         });

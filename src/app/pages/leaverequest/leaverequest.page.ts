@@ -1,3 +1,4 @@
+/* eslint-disable use-isnan */
 import { DatabaseService } from './../../services/database.service';
 /* eslint-disable no-var */
 import { HttpclientService } from './../../services/httpclient.service';
@@ -42,7 +43,8 @@ export class LeaverequestPage implements OnInit {
   isbtn1 = true;
   isbtn2 = false;
   rmid: any;
-
+  selectedItem: any = [];
+  isproject = false;
   constructor(
     public toastSer: ToastService,
     public httpser: HttpclientService,
@@ -53,8 +55,6 @@ export class LeaverequestPage implements OnInit {
 
   ) {
 
-    this.reportingmanager = Constants.reportingManager;
-    this.rmid = Constants.rmid;
     this. platform.ready().then(() => {
 
     if (this.platform.is('android')) {
@@ -102,8 +102,21 @@ export class LeaverequestPage implements OnInit {
     }
   }
   projectChange($event) {
-    this.project = $event.target.value;
-    console.log($event.target.value);
+    this.selectedItem = [$event.target.value];
+
+      if(this.selectedItem[0].reporting_manager !== ''){
+      this.project = this.selectedItem[0].project_id;
+      this.reportingmanager = this.selectedItem[0].reporting_manager;
+      this.rmid = this.selectedItem[0].rep_mang_id;
+      this.isproject = true;
+
+      }else{
+        this.project = null;
+        this.isproject = false;
+
+        this.toastSer.presentError('Please select another Project, this projects dont have RM');
+      }
+      console.log('selectedItem',this.selectedItem);
   }
 
   leaveChange($event) {
@@ -129,12 +142,17 @@ export class LeaverequestPage implements OnInit {
       this.isShownTotime = false;
       this.fromTime = '';
       this.toTime = '';
+      this.startDate = '';
+      this.endDate = '';
+
     }
   }
   getResopnseWithDates() {
     var date1 = new Date(this.startDate);
     var date2 = new Date(this.endDate);
     console.log('date1 ', date1, 'date2 ', date2);
+    console.log('startDate ', this.startDate, 'endDate ', this.endDate);
+    if(this.endDate !== undefined || this.endDate !== '' ||this.endDate !== null){
 
     if (date1 > date2) {
       this.startDate = '';
@@ -142,39 +160,49 @@ export class LeaverequestPage implements OnInit {
       this.toastSer.presentError('From Date should be less than To date.');
     } else {
       if (this.leaveFor !== 'Half Day') {
+        if(this.endDate!== undefined || this.endDate !== '' || this.endDate !== null ){
         const time = date2.getTime() - date1.getTime();
         var day = time / (1000 * 3600 * 24); //Diference in Days.
         this.days = day + 1;
         this.isShownDays = true;
         console.log('days', this.days);
       }
+      }
     }
+  }
   }
   getResopnseWithDates1() {
     var date1 = new Date(this.startDate);
     var date2 = new Date(this.endDate);
 
     console.log('date1 ', date1, 'date2 ', date2);
+    if(this.startDate !== undefined || this.startDate !== '' || this.startDate !== null){
     if (date2 < date1) {
       this.endDate = '';
       this.days = '';
       this.toastSer.presentError('To Date should be greater than From date.');
     } else {
       if (this.leaveFor !== 'Half Day') {
+        if(this.startDate !== undefined || this.startDate !== '',this.startDate !== null){
         const time = date2.getTime() - date1.getTime();
         var day = time / (1000 * 3600 * 24); //Diference in Days.
         this.days = day + 1;
+        console.log('daysssss ', this.days);
+
         this.isShownDays = true;
 
         console.log('days', day + 1);
+        }
       }
     }
+  }
   }
 
   getResopnseWithTimes() {
     var date1 = new Date(this.fromTime);
     var date2 = new Date(this.toTime);
     console.log('date1 ', date1, 'date2 ', date2);
+    if(this.toTime !== undefined  || this.toTime !== null || this.toTime !== ''){
 
     if (date1 > date2) {
       this.fromTime = '';
@@ -193,10 +221,12 @@ export class LeaverequestPage implements OnInit {
       }
     }
   }
+  }
   getResopnseWithTimes1() {
     var date1 = new Date(this.fromTime);
     var date2 = new Date(this.toTime);
     console.log('date1 ', date1, 'date2 ', date2);
+    if(this.fromTime !== undefined || this.fromTime !== '' || this.fromTime !== null){
 
     if (date2 < date1) {
       this.toTime = '';
@@ -217,11 +247,13 @@ export class LeaverequestPage implements OnInit {
       }
     }
   }
+  }
 
   getResopnseWithPermission() {
     var date1 = new Date(this.from);
     var date2 = new Date(this.to);
     console.log('date1 ', date1, 'date2 ', date2);
+    if(this.to !== undefined || this.to !== '' || this.to !== null){
 
     if (date1 > date2) {
       this.fromTime = '';
@@ -236,20 +268,21 @@ export class LeaverequestPage implements OnInit {
         this.fromTime = '';
         this.toTime = '';
       } else {
-        this.isShownDays = true;
       }
     }
+  }
   }
   getResopnseWithPermission1() {
     var date1 = new Date(this.from);
     var date2 = new Date(this.to);
     console.log('date1 ', date1, 'date2 ', date2);
+    if(this.from !== undefined && this.from !== '',this.from !== null){
 
     if (date2 < date1) {
       this.toTime = '';
       this.toastSer.presentError('To Time should be greater than From Time.');
     } else {
-      if (this.leaveFor === 'Half Day') {
+
         const time = date2.getTime() - date1.getTime();
         var hrs = time / 3600000;
         console.log('hours', hrs);
@@ -259,7 +292,6 @@ export class LeaverequestPage implements OnInit {
           this.fromTime = '';
           this.toTime = '';
         } else {
-          this.isShownDays = true;
         }
       }
     }

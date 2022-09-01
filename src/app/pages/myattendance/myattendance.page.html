@@ -50,8 +50,8 @@
          <ion-col size="6">
            <ion-item class="input">
 
-             <ion-select interface="popover" placeholder="Select Project" (ionChange)="projectChange($event)">
-               <ion-select-option  *ngFor="let project of projectList" [value]="project.project_id">
+             <ion-select interface="popover" placeholder="Select Project" (ionChange)="projectChange($event)" value="{{newproje}}">
+               <ion-select-option  *ngFor="let project of projectList" [value]="project">
                  {{project.project_name}}</ion-select-option>
              </ion-select>        </ion-item>
          </ion-col>

@@ -14,7 +14,7 @@
 
 
 
-  <ion-item class="input">
+  <ion-item class="input" *ngIf="isCal">
     <ion-label><strong>Month</strong></ion-label>
     <ion-select  placeholder="Select Month"  (ionChange)="monthChange($event)">
       <ion-select-option value="1">January</ion-select-option>
@@ -34,7 +34,7 @@
     </ion-select>
   </ion-item>
 
-  <ion-item class="input">
+  <ion-item class="input" *ngIf="isCal">
     <ion-label><strong>Year</strong></ion-label>
     <ion-select  placeholder="Select Year"  (ionChange)="yearChange($event)">
       <ion-select-option value="2022">2022</ion-select-option>

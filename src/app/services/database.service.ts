@@ -23,7 +23,7 @@ export class DatabaseService {
          .then(() => console.log('created User'))
          .catch(e => console.log(e));
 
-         db.executeSql('CREATE TABLE IF NOT EXISTS projects(project_id text, project_name text)',[])
+         db.executeSql('CREATE TABLE IF NOT EXISTS projects(project_id text, project_name text ,rep_mang_id text, reporting_manager text)',[])
          .then(() => console.log('Created Package'))
          .catch(e => console.log(e));
       })
@@ -33,12 +33,14 @@ export class DatabaseService {
 
 
 
-  addProjects(pid: any,pname: any){
+  addProjects(pid: any,pname: any, rmid: any,rmname: any){
     this.databaseObj.executeSql(`INSERT INTO projects
-    (project_id,project_name)
+    (project_id,project_name,rep_mang_id,reporting_manager)
     VALUES
     ('${pid}',
-    '${pname}'
+    '${pname}',
+    '${rmid}',
+    '${rmname}'
     )`,[]);
   }
 

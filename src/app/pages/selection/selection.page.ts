@@ -92,6 +92,8 @@ export class SelectionPage implements OnInit {
        Constants.resubmissinDatelist = response.data.rejections;
       this.router.navigate(['resubmission']);
 
+     }else{
+       this.toaseSer.presentError(response.msg);
      }
     });
   }

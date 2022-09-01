@@ -23,8 +23,8 @@
       </ion-col>
       <ion-col size="6">
         <ion-item class="padding" color="medium" (click)="onCancel()">
-          <ion-label style="white-space: pre-wrap !important;">Cancel</ion-label>
-          <ion-label style="white-space: pre-wrap !important;" class="center"><b>{{cancel}}</b></ion-label>
+          <ion-label style="white-space: pre-wrap !important;" class="center">Cancel</ion-label>
+          <ion-label style="white-space: pre-wrap !important;" class="center1"><b>{{cancel}}</b></ion-label>
 
         </ion-item>
 
@@ -33,15 +33,15 @@
     <ion-row>
       <ion-col size="6">
         <ion-item class="padding" color="medium" (click)="onApproved()">
-          <ion-label style="white-space: pre-wrap !important;">Approved</ion-label>
-          <ion-label style="white-space: pre-wrap !important;" class="center"><b>{{approved}}</b></ion-label>
+          <ion-label style="white-space: pre-wrap !important;" class="center">Approved</ion-label>
+          <ion-label style="white-space: pre-wrap !important;" class="center1"><b>{{approved}}</b></ion-label>
 
         </ion-item>
       </ion-col>
       <ion-col size="6">
         <ion-item class="padding" color="medium" (click)="onRejected()">
-          <ion-label style="white-space: pre-wrap !important;">Rejected</ion-label>
-          <ion-label style="white-space: pre-wrap !important;"class="center"><b>{{rejected}}</b></ion-label>
+          <ion-label style="white-space: pre-wrap !important;" class="center">Rejected</ion-label>
+          <ion-label style="white-space: pre-wrap !important;"class="center1"><b>{{rejected}}</b></ion-label>
 
         </ion-item>
 
@@ -128,6 +128,22 @@
 
         </ion-row>
 
+        <ion-row class="padding">
+          <ion-col size="6">
+            <ion-item>
+              <ion-label style="white-space: pre-wrap !important;"> <strong>Comments</strong> </ion-label>
+            </ion-item>
+
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label style="white-space: pre-wrap !important;">{{myleaveList.arc_reason}}</ion-label>
+            </ion-item>
+
+
+          </ion-col>
+
+        </ion-row>
 
 
 

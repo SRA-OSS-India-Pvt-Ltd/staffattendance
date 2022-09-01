@@ -1,3 +1,6 @@
+/* eslint-disable radix */
+/* eslint-disable no-var */
+import { AlertController } from '@ionic/angular';
 import { Constants } from 'src/app/common/constants';
 import { HttpclientService } from 'src/app/services/httpclient.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -11,6 +14,7 @@ import { CalendarComponent } from 'ionic2-calendar';
 export class MycalendarPage implements OnInit {
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
   colors: string[] = ['primary', 'warning', 'danger', 'success'];
+  isCal= false;
 
   viewTitle ='';
   eventSource = [];
@@ -32,7 +36,8 @@ export class MycalendarPage implements OnInit {
   };
   minDate = new Date().toISOString;
 
-  constructor(private httpClientSer: HttpclientService) {
+  constructor(private httpClientSer: HttpclientService,
+    public alertCtrl: AlertController) {
     this.getCurrentDate();
     this.getEmpAttendence(Constants.userid,this.month,this.year);
    }
@@ -43,12 +48,138 @@ export class MycalendarPage implements OnInit {
 
   next() {
     this.myCal.slideNext();
+    var monthstr = this.viewTitle.replace(/[^a-z]/gi, '');
+    var yearstr = this.viewTitle.replace(/\D/g, '');
+    console.log('month',monthstr);
+    console.log('year',yearstr);
+
+
+    if(monthstr === 'January'){
+      this.month = 2;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'February'){
+      this.month = 3;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'March'){
+      this.month = 4;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'April'){
+      this.month = 5;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'May'){
+      this.month = 6;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'June'){
+      this.month = 7;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'July'){
+      this.month = 8;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'August'){
+      this.month = 9;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'September'){
+      this.month = 10;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'October'){
+      this.month = 11;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'November'){
+      this.month = 12;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'December'){
+      this.month = 1;
+      this.getEmpAttendence(Constants.userid,this.month,parseInt(yearstr)+1);
+
+    }
+
+
+
+
   }
 
   back() {
     this.myCal.slidePrev();
+    var monthstr = this.viewTitle.replace(/[^a-z]/gi, '');
+    var yearstr = this.viewTitle.replace(/\D/g, '');
+    console.log('month',monthstr);
+    console.log('year',yearstr);
+
+    if(monthstr === 'January'){
+      this.month = 12;
+      this.getEmpAttendence(Constants.userid,this.month,parseInt(yearstr)-1);
+
+    }else if(monthstr === 'February'){
+      this.month = 1;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'March'){
+      this.month = 2;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'April'){
+      this.month = 3;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'May'){
+      this.month = 4;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'June'){
+      this.month = 5;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'July'){
+      this.month = 6;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'August'){
+      this.month = 7;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'September'){
+      this.month = 8;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'October'){
+      this.month = 9;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'November'){
+      this.month = 10;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+    }else if(monthstr === 'December'){
+      this.month = 11;
+      this.getEmpAttendence(Constants.userid,this.month,yearstr);
+
+
+    }
+
+
   }
   async onEventSelected(event) {
+
+    const alert = await this.alertCtrl.create({
+      header: event.title,
+      subHeader: event.desc,
+      message: 'Login Time: ' + event.logntime + '<br><br>Logout Time: ' + event.logouttime
+      + '<br><br>Hours: ' + event.hours
+
+    });
+    alert.present();
+
   }
   onViewTitleChanged(title) {
     this.viewTitle = title;
@@ -58,6 +189,7 @@ export class MycalendarPage implements OnInit {
 
 
   getEmpAttendence(userid: any,month: any,year: any){
+    this.eventSource = [];
     this.httpClientSer.staffMonthlyattendance(userid,month,year).
     subscribe((response: any)=>{
       console.log('response',response);
@@ -70,11 +202,14 @@ export class MycalendarPage implements OnInit {
         for (const value of this.attedanceList) {
           const date11 = Object.values(value)[0];
           const att=Object.values(value)[1];
+          const hrs=Object.values(value)[4];
+          const lntime=Object.values(value)[2];
+          const lotime=Object.values(value)[3];
           console.log('date',date11);
           console.log('attend',att);
 
 
-          this.loadEmployeeEvents(att,date11,date11);
+          this.loadEmployeeEvents(att,date11,date11,hrs,lntime,lotime);
         }
 
         console.log('ifff','gggg');
@@ -88,7 +223,7 @@ export class MycalendarPage implements OnInit {
 
 
 
-  loadEmployeeEvents(task: any, startdate: any, enddate: any ) {
+  loadEmployeeEvents(task: any, startdate: any, enddate: any,hrs: any,lntime: any,lotime: any ) {
     this.tit= task;
     let color45 = 'green';
 if(this.tit === 'NE'){
@@ -107,7 +242,10 @@ if(this.tit === 'NE'){
       endTime: new Date(enddate),
       allDay: this.event.allDay,
       desc: this.event.desc ,
-      eventColor: color45
+      eventColor: color45,
+      hours: hrs,
+      logntime: lntime,
+      logouttime: lotime
     };
 
 

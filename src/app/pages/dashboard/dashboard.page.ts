@@ -123,9 +123,33 @@ this.callalert();
   }
 
   movetoLeaveRequests(){
-    this.router.navigate(['leaverequest']);
+
+        this.platform.ready().then(() => {
+      if (this.platform.is('android')) {
+
+        if(window.navigator.connection.type === 'none'){
+          this.toaseSer.presentError('Please check your internet connection');
+        }else{
+
+          this.crservicecall();
+        }
+
+      }else{
+        this.crservicecall();
+
+      }
+    });
+
 
   }
+
+crservicecall(){
+  this.httpser.getmyCRs(Constants.userid).subscribe((response: any)=>{
+console.log('response',response);
+this.router.navigate(['leaverequest']);
+
+  });
+}
 
   async callalert() {
     const alert = await this.alertCtrl.create({

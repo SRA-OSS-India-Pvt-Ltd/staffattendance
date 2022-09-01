@@ -133,17 +133,26 @@ export class HttpclientService {
           );
    }
 
-   staffresubmitattendance(userid: any,prid: any,photo: any,lat: any,lng: any,amtype: any,pmtype: any){
+   staffresubmitattendance(userid: any,prid: any,photo: any,lat: any,lng: any,
+    amtype: any,pmtype: any,resubdate: any,lntime: any,lotime: any){
     const parameters = {user_id: userid,project_id: prid,
       am_photo: photo,am_lat: lat,am_lng: lng,pm_photo:photo, pm_lat: lat,pm_lng: lng,
-      comp_track_info: '',comp_track_time: '',am_attendance_type:amtype,pm_attendance_type:pmtype};
-    console.log('JSON', JSON.stringify(parameters));
+      comp_track_info: '',comp_track_time: '',am_attendance_type:amtype,pm_attendance_type:pmtype,
+      resubmission_date: resubdate,
+      log_in_time:lntime,log_out_time: lotime};
+      console.log('JSON', JSON.stringify(parameters));
 
-    return this.httpclient.post(
-      `${environment.apiUrl}/staff_resubmit_attendance `,
-      JSON.stringify(parameters)
-    );
+    return this.httpclient.post(`${environment.apiUrl}/staff_resubmit_attendance `,JSON.stringify(parameters));
 }
+getmyCRs(userid: any){
+  const parameters = {user_id: userid};
+  console.log('JSON', JSON.stringify(parameters));
+
+  return this.httpclient.post(
+    `${environment.apiUrl}/get_my_CRs `,
+    JSON.stringify(parameters)
+  );
+  }
 
 
 

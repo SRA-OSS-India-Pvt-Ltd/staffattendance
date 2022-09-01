@@ -46,7 +46,7 @@ export class MyattendancePage implements OnInit {
   blobImage: any;
   originalImage: any;
   joindate: any;
-
+newproje: any;
   type: any;
   projectList: any = [];
   project: any;
@@ -55,6 +55,7 @@ loginTime: any;
 loginText: any;
 logoutTime: any;
 logoutText: any;
+selectedItem: any = [];
   constructor(public toastSer: ToastService,
     private geolocation: Geolocation,
     public camera: Camera,
@@ -88,8 +89,15 @@ logoutText: any;
 
 
     projectChange($event){
-      this.project = $event.target.value;
-      console.log($event.target.value);
+      this.selectedItem = [$event.target.value];
+      if(this.selectedItem[0].reporting_manager !== ''){
+      this.project = this.selectedItem[0].project_id;
+      }else{
+        this.project = null;
+         this.newproje = null;
+        this.toastSer.presentError('Please select another Project, this projects dont have RM');
+      }
+      console.log('selectedItem',this.selectedItem);
 
 
      }
