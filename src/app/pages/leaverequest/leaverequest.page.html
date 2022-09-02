@@ -251,6 +251,15 @@
       </ion-col>
     </ion-row>
 
+
+    <ion-row *ngIf="showcheck" >
+      <ion-col size="12">
+        <ion-item class="padding">
+          <ion-checkbox checked="false" (ionChange)="isChecked($event)"></ion-checkbox>   isCR_included
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
     <ion-row *ngIf="isbtn1" >
       <ion-col size="6">
         <ion-button style="text-transform: none;" (click)="submitPermission()" expand="block" >Submit            </ion-button>

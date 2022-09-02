@@ -144,9 +144,17 @@ this.callalert();
   }
 
 crservicecall(){
-  this.httpser.getmyCRs(Constants.userid).subscribe((response: any)=>{
-console.log('response',response);
-this.router.navigate(['leaverequest']);
+ this.httpser.getmyCRs(Constants.userid).subscribe((response: any)=>{
+if(response.error === false){
+  Constants.crList = response.data.CRs;
+  console.log('response',response.data.CRs);
+
+  this.router.navigate(['leaverequest']);
+
+
+}else{
+  this.toaseSer.presentError(response.msg);
+}
 
   });
 }

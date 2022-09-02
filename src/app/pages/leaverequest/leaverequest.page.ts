@@ -45,6 +45,9 @@ export class LeaverequestPage implements OnInit {
   rmid: any;
   selectedItem: any = [];
   isproject = false;
+  iscr = 0;
+  showcheck = false;
+  crList: any = [];
   constructor(
     public toastSer: ToastService,
     public httpser: HttpclientService,
@@ -86,7 +89,11 @@ export class LeaverequestPage implements OnInit {
       this.isbtn1 = false;
       this.isbtn2 = true;
       this.requestTypeId = 1;
+
+
+
     } else if (this.requestType === 'Permission') {
+      this.showcheck = false;
       this.isLeave = false;
       this.isPermission = true;
       this.isbtn1 = true;
@@ -110,6 +117,13 @@ export class LeaverequestPage implements OnInit {
       this.rmid = this.selectedItem[0].rep_mang_id;
       this.isproject = true;
 
+
+
+
+
+
+
+
       }else{
         this.project = null;
         this.isproject = false;
@@ -130,9 +144,25 @@ export class LeaverequestPage implements OnInit {
       this.isShownFromTime = true;
       this.isShownTotime = true;
       this.isShownDays = true;
-      this.startDate = this.minDate;
-      this.endDate = this.minDate;
+      this.startDate = '';
+      this.endDate = '';
+      this.showcheck = false;
     } else {
+      console.log('crlist', Constants.crList);
+      if(Constants.crList !== 0){
+
+      this.crList = Constants.crList.filter((data: any) =>
+      data.project_id.includes(this.project));
+      console.log('crList',this.crList);
+      if(this.crList[0].cr_count !== '0'){
+        this.showcheck = true;
+      }else{
+        this.showcheck = false;
+      }
+    }
+
+
+
       this.leaveTypeId = 1;
 
       this.days = 1;
@@ -348,7 +378,8 @@ export class LeaverequestPage implements OnInit {
       this.toastSer.presentError('Please Select  Reason	');
     } else if (this.reason === '') {
       this.toastSer.presentError('Please Select Reason	');
-    } else {
+    }
+    else {
       this.autoLoader();
 
       this. platform.ready().then(() => {
@@ -386,7 +417,8 @@ export class LeaverequestPage implements OnInit {
           this.days,
           '',
           '',
-          this.project
+          this.project,
+          this.iscr
         )
         .subscribe((response1: any) => {
           if (response1.error === false) {
@@ -410,7 +442,8 @@ export class LeaverequestPage implements OnInit {
           this.days,
           this.fromTime,
           this.toTime,
-          this.project
+          this.project,
+          ''
         )
         .subscribe((response1: any) => {
           if (response1.error === false) {
@@ -423,7 +456,10 @@ export class LeaverequestPage implements OnInit {
     }
   }
 
-  cancel() {}
+  cancel() {
+    this.router.navigate(['dashboard']);
+
+  }
   submitPermission() {
     if (this.project === undefined) {
       this.toastSer.presentError('Please Select Project	');
@@ -491,7 +527,8 @@ export class LeaverequestPage implements OnInit {
       '',
       this.from,
       this.to,
-      this.project
+      this.project,
+      ''
     )
     .subscribe((response: any) => {
       console.log('response', response);
@@ -517,4 +554,18 @@ export class LeaverequestPage implements OnInit {
       });
     });
   }
+
+  isChecked(event) {
+    const isChecked = event.currentTarget.checked;
+    if(isChecked === true){
+      this.iscr = 1;
+      console.log('check',isChecked);
+    }else{
+      this.iscr = 0;
+      console.log('check',isChecked);
+
+    }
+
+  }
+
 }

@@ -70,11 +70,11 @@ export class HttpclientService {
 
 
   leaveRequest(userid: any,rean: any,reqtype: any,leaday: any,fdate: any, todat: any,rmid: any,leavecount: any,
-    ftime: any,ttime: any,pid: any){
+    ftime: any,ttime: any,pid: any,iscrinclude: any){
 
     const parameters = {user_id: userid,reason:rean,request_type:reqtype,leaveday: leaday,
       from_date: fdate,to_date:todat,rep_mang_id:rmid,appliedleavescount:leavecount,from_time:ftime,to_time:ttime,
-      project_id:pid};
+      project_id:pid,isCR_included: iscrinclude};
     console.log('JSON', JSON.stringify(parameters));
 
     return this.httpclient.post(
