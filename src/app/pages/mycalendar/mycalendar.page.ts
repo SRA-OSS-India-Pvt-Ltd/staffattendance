@@ -171,11 +171,20 @@ export class MycalendarPage implements OnInit {
   }
   async onEventSelected(event) {
 
+    if(event.logntime === undefined){
+      var ltime = '';
+      var lotime = '';
+      var hrs = '';
+    }else{
+      ltime = event.logntime;
+      lotime = event.logouttime;
+      hrs = event.hours;
+    }
     const alert = await this.alertCtrl.create({
       header: event.title,
       subHeader: event.desc,
-      message: 'Login Time: ' + event.logntime + '<br><br>Logout Time: ' + event.logouttime
-      + '<br><br>Hours: ' + event.hours
+      message: 'Login Time: ' + ltime + '<br><br>Logout Time: ' + lotime
+      + '<br><br>Hours: ' + hrs
 
     });
     alert.present();
@@ -228,12 +237,19 @@ export class MycalendarPage implements OnInit {
     let color45 = 'green';
 if(this.tit === 'NE'){
   color45='red';
+  task = 'No Entry';
 }else if(this.tit ==='P'){
   color45 ='green';
+  task = 'Present';
 }else if(this.tit ==='CR'){
   color45 ='blue';
+  task = 'CR';
 }else if(this.tit ==='L'){
   color45 ='orange';
+  task = 'Leave';
+}else if(this.tit ==='A'){
+  color45 ='purple';
+  task = 'Absent';
 }
 
     const eventCopy1 = {

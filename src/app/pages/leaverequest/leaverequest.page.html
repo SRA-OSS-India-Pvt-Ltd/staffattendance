@@ -129,7 +129,7 @@
           <ion-label style="white-space: pre-wrap !important;"><strong>From Time:</strong></ion-label>
 
 
-          <ion-input value="{{ fromTime | date: 'dd-MM-yyyy hh:mm' }}" id="fromTime" >
+          <ion-input value="{{ fromTime | date: 'dd-MM-yyyy hh:mm a' }}" id="fromTime" >
           </ion-input>
           <ion-popover trigger="fromTime" size="cover" [dismissOnSelect]="true"   >
             <ng-template>
@@ -150,7 +150,7 @@
           <ion-label style="white-space: pre-wrap !important;"><strong>To Time:</strong></ion-label>
 
 
-          <ion-input value="{{ toTime | date: 'dd-MM-yyyy hh:mm' }}" id="toTime" >
+          <ion-input value="{{ toTime | date: 'dd-MM-yyyy hh:mm a' }}" id="toTime" >
           </ion-input>
           <ion-popover trigger="toTime" size="cover"  [dismissOnSelect]="true" >
             <ng-template>
@@ -188,9 +188,9 @@
           <ion-label style="white-space: pre-wrap !important;"><strong>From </strong></ion-label>
 
 
-          <ion-input value="{{ from | date: 'dd-MM-yyyy hh:mm' }}" id="from" >
+          <ion-input value="{{ from | date: 'dd-MM-yyyy hh:mm a' }}" id="from" >
           </ion-input>
-          <ion-popover trigger="from" size="cover" [dismissOnSelect]="true" >
+          <ion-popover trigger="from" size="cover"  >
             <ng-template>
               <ion-datetime displayFormat="h:mm A"  [(ngModel)]="from" [min]="minDate"  (ngModelChange)="getResopnseWithPermission()"></ion-datetime>
             </ng-template>
@@ -209,9 +209,9 @@
           <ion-label style="white-space: pre-wrap !important;"><strong>To </strong></ion-label>
 
 
-          <ion-input value="{{ to | date: 'dd-MM-yyyy hh:mm' }}" id="to" >
+          <ion-input value="{{ to | date: 'dd-MM-yyyy hh:mm a' }}" id="to" >
           </ion-input>
-          <ion-popover trigger="to" size="cover" [dismissOnSelect]="true" >
+          <ion-popover trigger="to" size="cover"  >
             <ng-template>
               <ion-datetime displayFormat="h:mm A"  [(ngModel)]="to" [min]="minDate" (ngModelChange)="getResopnseWithPermission1()"  ></ion-datetime>
             </ng-template>

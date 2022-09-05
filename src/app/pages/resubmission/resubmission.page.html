@@ -53,9 +53,9 @@
         <ion-label style="white-space: pre-wrap !important;"><strong>Login Time </strong></ion-label>
 
 
-        <ion-input value="{{ loginTime | date: 'dd-MM-yyyy hh:mm' }}" id="loginTime" >
+        <ion-input value="{{ loginTime | date: 'dd-MM-yyyy hh:mm a' }}" id="loginTime" >
         </ion-input>
-        <ion-popover trigger="loginTime" size="cover" [dismissOnSelect]="true">
+        <ion-popover trigger="loginTime" size="cover" >
           <ng-template>
             <ion-datetime displayFormat="h:mm A"  [(ngModel)]="loginTime"   (ngModelChange)="getResopnseWithPermission()" [min]="resubmitDate" [max]="resubmitDate"></ion-datetime>
           </ng-template>
@@ -75,9 +75,9 @@
         <ion-label style="white-space: pre-wrap !important;"><strong>Logout Time </strong></ion-label>
 
 
-        <ion-input value="{{ logoutTime | date: 'dd-MM-yyyy hh:mm' }}" id="logoutTime" >
+        <ion-input value="{{ logoutTime | date: 'dd-MM-yyyy hh:mm a' }}" id="logoutTime" >
         </ion-input>
-        <ion-popover trigger="logoutTime" size="cover"  [dismissOnSelect]="true" >
+        <ion-popover trigger="logoutTime" size="cover"   >
           <ng-template>
             <ion-datetime displayFormat="h:mm A"  [(ngModel)]="logoutTime"  (ngModelChange)="getResopnseWithPermission1()"  [min]="resubmitDate" [max]="resubmitDate" ></ion-datetime>
           </ng-template>

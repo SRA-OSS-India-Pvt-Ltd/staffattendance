@@ -83,6 +83,12 @@ export class LeaverequestPage implements OnInit {
   requestChange($event) {
     this.requestType = $event.target.value;
     console.log($event.target.value);
+    this.startDate = '';
+    this.endDate = '';
+    this.fromTime = '';
+    this.toTime = '';
+    this.from = '';
+    this.to = '';
     if (this.requestType === 'Leave') {
       this.isLeave = true;
       this.isPermission = false;
@@ -136,6 +142,13 @@ export class LeaverequestPage implements OnInit {
   leaveChange($event) {
     this.leaveFor = $event.target.value;
     console.log('leave for', $event.target.value);
+    this.startDate = '';
+    this.endDate = '';
+    this.fromTime = '';
+    this.toTime = '';
+    this.from = '';
+    this.to = '';
+
     if (this.leaveFor === 'Half Day') {
       this.leaveTypeId = 2;
       this.days = 0.5;
@@ -154,7 +167,7 @@ export class LeaverequestPage implements OnInit {
       this.crList = Constants.crList.filter((data: any) =>
       data.project_id.includes(this.project));
       console.log('crList',this.crList);
-      if(this.crList[0].cr_count !== '0'){
+      if(this.crList[0].cr_count !== 0){
         this.showcheck = true;
       }else{
         this.showcheck = false;
@@ -186,6 +199,7 @@ export class LeaverequestPage implements OnInit {
 
     if (date1 > date2) {
       this.startDate = '';
+      this.endDate = '';
       this.days = '';
       this.toastSer.presentError('From Date should be less than To date.');
     } else {
@@ -194,8 +208,12 @@ export class LeaverequestPage implements OnInit {
         const time = date2.getTime() - date1.getTime();
         var day = time / (1000 * 3600 * 24); //Diference in Days.
         this.days = day + 1;
+
         this.isShownDays = true;
         console.log('days', this.days);
+        console.log(this.getValueBeforeDecimal(123.456)); // 👉️ 123
+        console.log(this.getValueBeforeDecimal(this.days)); // 👉️ 123
+
       }
       }
     }
@@ -209,6 +227,7 @@ export class LeaverequestPage implements OnInit {
     if(this.startDate !== undefined || this.startDate !== '' || this.startDate !== null){
     if (date2 < date1) {
       this.endDate = '';
+      this.startDate = '';
       this.days = '';
       this.toastSer.presentError('To Date should be greater than From date.');
     } else {
@@ -226,6 +245,14 @@ export class LeaverequestPage implements OnInit {
       }
     }
   }
+  }
+
+
+
+   getValueBeforeDecimal(num) {
+    const beforeDecimalStr = num.toString().split('.')[0];
+
+    return Number(beforeDecimalStr);
   }
 
   getResopnseWithTimes() {
@@ -297,6 +324,8 @@ export class LeaverequestPage implements OnInit {
 
         this.fromTime = '';
         this.toTime = '';
+        this.from = '';
+        this.to = '';
       } else {
       }
     }
@@ -321,6 +350,8 @@ export class LeaverequestPage implements OnInit {
 
           this.fromTime = '';
           this.toTime = '';
+          this.from = '';
+          this.to = '';
         } else {
         }
       }
