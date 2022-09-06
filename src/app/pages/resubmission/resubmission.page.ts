@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import { Router } from '@angular/router';
 /* eslint-disable no-var */
 import { ToastService } from 'src/app/services/toast.service';
@@ -86,15 +87,11 @@ public router: Router
   resubDateChange($event){
     this.selecteditem = [$event.target.value];
     this.resubmitDate = this.selecteditem[0].tracking_date;
-    this.project = this.selecteditem[0].project_id;
+
+    this.projectList = this.projectList.filter((data: any) =>
+    data.project_id.includes(this.selecteditem[0].project_id));
+
     this.comments = this.selecteditem[0].rejection_comments;
-    if(this.project === '1'){
-      this.prvalu = 'DFCCIL Package - 1';
-    }else if(this.project === '2'){
-      this.prvalu = 'DFCCIL Package - 2';
-    }else if(this.project === '3'){
-      this.prvalu = 'DFCCIL Package - 3';
-    }
 
 
 
@@ -128,12 +125,14 @@ public router: Router
   projectChange($event){
     this.selectedProject = [$event.target.value];
 
-    if(this.selectedProject[0].reporting_manager !== ''){
-      this.project = this.selectedProject[0].project_id;
-      }else{
-        this.project = null;
-        this.toastSer.presentError('Please select another Project, this projects dont have RM');
-      }
+    this.project = this.selectedProject[0].project_id;
+
+    // if(this.selectedProject[0].reporting_manager !== ''){
+    //   this.project = this.selectedProject[0].project_id;
+    //   }else{
+    //     this.project = null;
+    //     this.toastSer.presentError('Please select another Project, this projects dont have RM');
+    //   }
 
 
 

@@ -14,6 +14,7 @@ export abstract class Constants {
   public static reqType: any;
   public static resubmissinDatelist: any=[];
   public static crList: any=[];
+  public static projid: any;
 
 
 //npm i @ionic-native/camera watermarkjs

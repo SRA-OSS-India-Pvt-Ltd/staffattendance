@@ -34,7 +34,7 @@
      <ion-col size="6">
        <ion-item class="input">
 
-         <ion-select interface="popover" placeholder="Select Project" (ionChange)="projectChange($event)" value="{{project}}">
+         <ion-select interface="popover" placeholder="Select Project" (ionChange)="projectChange($event)" >
            <ion-select-option  *ngFor="let project of projectList" [value]="project">
              {{project.project_name}}</ion-select-option>
          </ion-select>        </ion-item>
@@ -50,7 +50,7 @@
     <ion-col size="12">
       <ion-item class="input">
 
-        <ion-label style="white-space: pre-wrap !important;"><strong>Login Time </strong></ion-label>
+        <ion-label style="white-space: pre-wrap !important;"><strong>Login Time: </strong></ion-label>
 
 
         <ion-input value="{{ loginTime | date: 'dd-MM-yyyy hh:mm a' }}" id="loginTime" >
@@ -72,7 +72,7 @@
     <ion-col size="12">
       <ion-item class="input">
 
-        <ion-label style="white-space: pre-wrap !important;"><strong>Logout Time </strong></ion-label>
+        <ion-label style="white-space: pre-wrap !important;"><strong>Logout Time: </strong></ion-label>
 
 
         <ion-input value="{{ logoutTime | date: 'dd-MM-yyyy hh:mm a' }}" id="logoutTime" >
@@ -92,7 +92,7 @@
   <ion-row   *ngIf="isdate">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label style="white-space: pre-wrap !important;" > <strong>Login Type	</strong>  </ion-label>
+        <ion-label style="white-space: pre-wrap !important;" > <strong>Login Type:	</strong>  </ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -109,7 +109,7 @@
   <ion-row *ngIf="isdate">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label style="white-space: pre-wrap !important;" > <strong>Logout Type	</strong>  </ion-label>
+        <ion-label style="white-space: pre-wrap !important;" > <strong>Logout Type:	</strong>  </ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -128,7 +128,7 @@
   <ion-row *ngIf="isdate">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label style="white-space: pre-wrap !important;" > <strong>Comments	</strong>  </ion-label>
+        <ion-label style="white-space: pre-wrap !important;" > <strong>Comments:	</strong>  </ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -143,7 +143,7 @@
   <ion-row  *ngIf="isdate">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>  Upload Photo</strong></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>  Upload Photo:</strong></ion-label>
       </ion-item>
 
     </ion-col>

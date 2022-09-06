@@ -166,12 +166,14 @@ export class LeaverequestPage implements OnInit {
 
       this.crList = Constants.crList.filter((data: any) =>
       data.project_id.includes(this.project));
-      console.log('crList',this.crList);
-      if(this.crList[0].cr_count !== 0){
+      console.log('crList',this.crList.length);
+      if(this.crList.length>0){
+      if(this.crList[0].cr_count !== '0'){
         this.showcheck = true;
       }else{
         this.showcheck = false;
       }
+    }
     }
 
 

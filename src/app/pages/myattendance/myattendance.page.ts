@@ -68,7 +68,6 @@ selectedItem: any = [];
 
       this. platform.ready().then(() => {
         this.getLatLong();
-        this.setViews();
         if (this.platform.is('android')) {
           this.database.getProjects().then((data) => {
             this.projectList = [];
@@ -79,8 +78,11 @@ selectedItem: any = [];
               }
               console.log('packageList',this.projectList);
             }});
+            this.setViews();
+
         }else{
           this.projectList = Constants.projectList;
+          this.setViews();
 
         }
       });
@@ -107,16 +109,16 @@ selectedItem: any = [];
       }else{
         this.isdepend = true;
       }
-      if(Constants.amtype === 'Leave'){
-        this.loginTime = 'On Leave';
-        this.isam = true;
-        this.ispm = true;
-        this.isType = false;
-        this.isphoto = false;
-        this.btnLayout = false;
-      }
+
 
       if(Constants.amtype === 'Office' || Constants.amtype === 'Site'){
+
+        this.projectList = this.projectList.filter((data: any) =>
+        data.project_id.includes(Constants.projid));
+        console.log('prlist',this.projectList);
+        console.log('projid',Constants.projid);
+
+
         this.isType = true;
         if(Constants.logintime !== ''){
           this.loginTime = Constants.amtype + ' Log-in';
@@ -448,7 +450,9 @@ selectedItem: any = [];
       });
 
     } else if (Constants.logoutTime === '00:00:00') {
-      this.httpServ.epmAttendancePM(Constants.userid,this.project,this.waterMarkImage.nativeElement.src,'',this.type,this.latitude,this.longitude,'').subscribe((response: any)=>{
+      this.httpServ.epmAttendancePM(Constants.userid,this.project,
+        this.waterMarkImage.nativeElement.src,'',
+        this.type,this.latitude,this.longitude,'').subscribe((response: any)=>{
         console.log('response',response);
         if(response.error === false){
           this.toastSer.presentSuccess(response.msg);

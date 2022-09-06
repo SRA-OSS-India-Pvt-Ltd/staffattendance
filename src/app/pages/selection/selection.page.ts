@@ -58,6 +58,7 @@ export class SelectionPage implements OnInit {
         Constants.pmtype = response.data.pm_type;
         Constants.reportingManager = response.data.reporting_manager;
         Constants.rmid = response.data.rep_mang_id;
+        Constants.projid = response.data.project_id;
 
         this.router.navigate(['myattendance']);
 
